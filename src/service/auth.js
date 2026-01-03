@@ -22,3 +22,13 @@ export const logoutUser = async () => {
   await api.post("/api/v1/auth/logout")
   localStorage.removeItem('authToken')
 }
+
+export const getCurrentUser = async () => {
+  try {
+    const { data } = await api.get('/api/v1/auth/me')
+    return data
+  } catch (err) {
+    console.error('Get current user error:', err?.response || err)
+    throw err
+  }
+}
